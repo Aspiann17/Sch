@@ -33,9 +33,28 @@ Null Coalescing
 $this->nama ?? $nama
 
 
-Destrukturisasi Array
+Destructuring Array
 ["nama" => $nama, "stok" => $stok, "harga" => $harga] = $this->get($this->id);
 
+
+Destructuring Assignment
+[$this->controller, $this->method] = $url
+
+.htaccess
+Jika ingin user tidak dapat mengakses directory tertentu, dapat menggunakan .htaccess dengan isi:
+Options -Indexes # menolak semua akses ke directory yang tidak memiliki file index
+/etc/apache2/apache2.conf
+Pada bagian
+    <Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+    </Directory>
+Pastikan AllowOverride All
+
+Jika ingin RewriteEngine dapat digunakan, jalankan command:
+    a2enmod rewrite
+Command tersebut akan mengaktifkan mod mod_rewrite
 
 execute() dan exec()
 ...

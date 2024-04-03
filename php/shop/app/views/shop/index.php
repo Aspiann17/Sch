@@ -1,12 +1,10 @@
-<?php require __DIR__ . "/App/setup.php" ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toko</title>
+    <title><?= $data["title"] ?></title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,12 +14,12 @@
             <thead>
                 <form action="" method="get">
                     <tr>
-                        <th class="id"><?= (Utils::isset("mode","edit")) ? "ID" : "No" ?></th>
+                        <th class="id"><?= ($data["mode"] == "edit") ? "ID" : "No" ?></th>
                         <th class="barang">Nama Barang</th>
                         <th class="stok">Stok</th>
                         <th class="harga">Harga</th>
                         <th class="button">
-                            <?php if (Utils::isset("mode","edit")) : ?>
+                            <?php if ($data["mode"] == "edit") : ?>
                                 <button title="Selesai" value="complete">Complete</button>
                             <?php else : ?>
                                     <button title="Enter edit mode" name="mode" value="edit">Edit</button>
@@ -35,18 +33,18 @@
                     <?php foreach ($list_barang as $barang) : $no++ ?>
                         <form action="" method="post">
                             <tr>
-                                <td><?= (Utils::isset("mode","edit")) ? $barang["id"] : $no ?></td>
+                                <td><?= ($data["mode"] == "edit") ? $barang["id"] : $no ?></td>
                                 <td><?= $barang["nama"] ?></td>
                                 <td><?= $barang["stok"] ?></td>
                                 <td><?= $barang["harga"] ?></td>
 
-                                <?php if (Utils::isset("mode","edit")) : ?>
+                                <?php if ($data["mode"] == "edit") : ?>
                                     <td><button type="submit" name="action" value="delete" title="Hapus Barang">Delete</button></td>
                                 <?php else : ?>
                                     <td><button type="submit" name="action" value="buy" title="Beli Barang">Buy</button></td>
                                 <?php endif ?>
 
-                                <?php if (Utils::isset("mode","edit")) : ?>
+                                <?php if ($data["mode"] == "edit") : ?>
                                     <input type="hidden" name="mode" value="edit">
                                 <?php endif ?>
 
@@ -59,7 +57,7 @@
                 <?php endif ?>
 
 
-                <?php if (Utils::isset("mode","edit")) : ?>
+                <?php if ($data["mode"] == "edit") : ?>
                     <form action="" method="post">
                         <input type="hidden" name="mode" value="edit">
                         <tr class="add">
@@ -83,7 +81,7 @@
                 <?php endif ?>
 
                 <?php // User Data ?>
-                <?php if (!Utils::isset("mode", "edit")) : ?>
+                <?php if (!$data["mode"] == "edit") : ?>
                     <div class="users">
                         <div class="wallet">
                             <tr><th colspan="5">Dompet</th></tr>
